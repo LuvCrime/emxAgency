@@ -1,7 +1,7 @@
 import React from "react";
 import autoBind from "react-autobind";
-import Button from 'react-bootstrap/Button';
-import './SaveImgButton.scss'
+import Button from "react-bootstrap/Button";
+import "./SaveImgButton.scss";
 
 export class SaveImg extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export class SaveImg extends React.Component {
       return;
     }
     if (imgSize === "оригинал") {
+      this.addWaterMark(canvasSave);
       this.downloadCanvas(canvasSave);
     } else {
       this.resizeImg(canvasSave).then((canvas) => {
@@ -44,16 +45,27 @@ export class SaveImg extends React.Component {
     });
   }
 
+  addWaterMark(canvas) {
+    var context = canvas.getContext("2d");
+    context.font = "55px Verdana";
+    context.fillStyle = "white";
+    context.globalAlpha = 0.4;
+    context.textBaseline = "middle";
+    context.textAlign = "center";
+    context.fillText("EMX test", canvas.width / 2, canvas.height / 2);
+  }
+
   render() {
     return (
       <>
-      <Button variant="light"
-        to="#"
-        className="save-button"
-        onClick={(e) => this.onImgSave(this.props.title)}
-      >
-        Скачать {this.props.title}
-      </Button>
+        <Button
+          variant="light"
+          to="#"
+          className="save-button"
+          onClick={(e) => this.onImgSave(this.props.title)}
+        >
+          Скачать {this.props.title}
+        </Button>
       </>
     );
   }
