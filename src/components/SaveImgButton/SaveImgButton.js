@@ -1,5 +1,7 @@
 import React from "react";
 import autoBind from "react-autobind";
+import Button from 'react-bootstrap/Button';
+import './SaveImgButton.scss'
 
 export class SaveImg extends React.Component {
   constructor(props) {
@@ -44,13 +46,15 @@ export class SaveImg extends React.Component {
 
   render() {
     return (
-      <button
+      <>
+      <Button variant="light"
         to="#"
         className="save-button"
         onClick={(e) => this.onImgSave(this.props.title)}
       >
         Скачать {this.props.title}
-      </button>
+      </Button>
+      </>
     );
   }
 }
